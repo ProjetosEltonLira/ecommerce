@@ -15,7 +15,9 @@ data class UserEntity(
     @Column (name = "full_name")
     var fullName:String ,
 
-    @OneToOne(fetch = FetchType.EAGER) //FetchTypy EAGER, garante que todas as classes que tem relacionamento sejam carregadas no GET
+
+
+    @OneToOne(fetch = FetchType.EAGER, cascade = [CascadeType.REMOVE,CascadeType.PERSIST]) //FetchTypy EAGER, garante que todas as classes que tem relacionamento sejam carregadas no GET
     @JoinColumn(name = "billing_adress_id")
     var billingAddressEntity: BillingAddressEntity?
 ){

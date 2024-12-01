@@ -20,11 +20,12 @@ class UserService (private val userRepository: UserRepository,
             number = dto.number
             complement = dto.complement
         }
-        var savedBillingAddress= billingAddressRepository.save(billingAddress)
+        //var savedBillingAddress= billingAddressRepository.save(billingAddress)
 
         var userEntity = UserEntity().apply{
             fullName = dto.fullName
-            billingAddressEntity = savedBillingAddress
+            //billingAddressEntity = savedBillingAddress
+            billingAddressEntity = billingAddress
         }
 
         return userRepository.save(userEntity)
@@ -37,14 +38,12 @@ class UserService (private val userRepository: UserRepository,
     fun deleteById(userId: UUID): Boolean {
 
         //Pra funcionar, precisamos primeiro apagar o billingAddress e depois o usuário, pois existe uma dependencia entre as tabelas
-
         var user = userRepository.findById(userId)
         if (user.isPresent) {
             userRepository.deleteById(userId)
-            user.get().billingAddressEntity?.let { billingAddressRepository.deleteById(it.id) }
-            return user.isPresent
+            //user.get().billingAddressEntity?.let { billingAddressRepository.deleteById(it.id) }
+            //Com o CASCADE.ALL configurado, o JPA trata de fazer deleção da tabela filha.
         }
         return user.isPresent
-
     }
 }
