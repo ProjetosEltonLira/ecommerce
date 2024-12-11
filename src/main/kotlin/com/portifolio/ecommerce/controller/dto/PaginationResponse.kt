@@ -1,9 +1,9 @@
 package com.portifolio.ecommerce.controller.dto
 
-import java.util.*
-
-data class ApiResponse<T>(
-    val data : MutableList<T>,
-    val pagination: PagitionResponse
+data class PaginationResponse(
+    val page : Int,
+    val pageSize : Int,
+    val totalElements : Long,
+    val totalPages : Int
 )
 

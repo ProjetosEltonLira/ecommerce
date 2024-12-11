@@ -1,11 +1,8 @@
 package com.portifolio.ecommerce.repository
 
-import com.portifolio.ecommerce.entities.OrderItemEntity
-import com.portifolio.ecommerce.entities.OrderItemId
-import com.portifolio.ecommerce.entities.ProductEntity
-import com.portifolio.ecommerce.entities.UserEntity
+import com.portifolio.ecommerce.entities.*
 import org.springframework.data.jpa.repository.JpaRepository
 import java.util.*
 
-interface OrderItemRepository : JpaRepository <OrderItemEntity, OrderItemId> {
+interface TagRepository : JpaRepository <TagEntity, Long> {
 }

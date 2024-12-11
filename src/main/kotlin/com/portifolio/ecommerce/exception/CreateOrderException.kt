@@ -1,4 +1,4 @@
 package com.portifolio.ecommerce.exception
 
-class CreateOrderException {
+class CreateOrderException(message: String?) : RuntimeException(message) {
 }

@@ -6,4 +6,5 @@ data class CreateUserDto(
     val fullName : String,
     val address : String,
     val number : String,
-    val complement : String)
+    val complement : String
+)
