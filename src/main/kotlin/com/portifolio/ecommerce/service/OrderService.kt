@@ -91,4 +91,8 @@ class OrderService (private val userRepository: UserRepository,
         
     }
 
+    fun findById(orderId: Long): Optional<OrderEntity> {
+        return orderRepository.findById(orderId)
+    }
+
 }

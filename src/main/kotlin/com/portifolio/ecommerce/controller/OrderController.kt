@@ -1,9 +1,6 @@
 package com.portifolio.ecommerce.controller
 
-import com.portifolio.ecommerce.controller.dto.ApiResponse
-import com.portifolio.ecommerce.controller.dto.CreateOrderDto
-import com.portifolio.ecommerce.controller.dto.OrderSummaryDto
-import com.portifolio.ecommerce.controller.dto.PaginationResponse
+import com.portifolio.ecommerce.controller.dto.*
 import com.portifolio.ecommerce.service.OrderService
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
@@ -25,9 +22,7 @@ class OrderController (
     @GetMapping
     fun listOfOrder (@RequestParam(name = "page", defaultValue = "0") page : Int,
                      @RequestParam(name = "pageSize", defaultValue = "10") pageSize : Int): ResponseEntity<ApiResponse<OrderSummaryDto>>{
-
         var resp = orderService.findAll(page,pageSize)
-
 
         return ResponseEntity.ok(
             ApiResponse(
@@ -39,4 +34,18 @@ class OrderController (
                     totalPages = resp.totalPages )
             ))
     }
+
+    @GetMapping (path = ["/{order_id}"])
+    fun findById(@PathVariable("order_id") orderId: Long) :ResponseEntity<OrderResponseDto>{
+
+        var order = orderService.findById(orderId)
+
+        return if (order.isPresent) {
+            ResponseEntity.ok(OrderResponseDto.fromEntity(order))
+        }
+        else {
+            ResponseEntity.notFound().build()
+        }
+    }
+
 }
